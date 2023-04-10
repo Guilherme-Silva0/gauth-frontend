@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply w-screen h-screen bg-second;
+body,
+#root {
+  @apply w-screen h-screen bg-zinc-200 transition-all dark:bg-second;
 }
