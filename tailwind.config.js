@@ -9,6 +9,12 @@ export default {
         second: "#111827",
         third: "#0099dd",
       },
+      fontFamily: {
+        outfit: "'Outfit', sans-serif",
+      },
+      boxShadow: {
+        inside: "0 0 10px rgba(0,0,0,0.3) inset",
+      },
     },
   },
   plugins: [],
