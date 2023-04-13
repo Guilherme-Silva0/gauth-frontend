@@ -1,14 +1,16 @@
-import Main from "../../components/Main";
-import Form from "../../components/Form";
-import Input from "../../components/Input";
-import Title from "../../components/Title";
-import Button from "../../components/Button";
-import Label from "../../components/Label";
-import InputGroup from "../../components/InputGroup";
-import IconAnimate from "../../components/IconAnimate";
-import FormGroup from "../../components/FormGroup";
-import GeneralError from "../../components/GeneralError";
-import Error from "../../components/Error";
+import {
+  Main,
+  Form,
+  Input,
+  Title,
+  Button,
+  Label,
+  InputGroup,
+  IconAnimate,
+  FormGroup,
+  GeneralError,
+  Error,
+} from "../../components";
 
 const Register = () => {
   return (

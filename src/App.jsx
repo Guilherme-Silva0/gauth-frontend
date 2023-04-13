@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import useTheme from "./hooks/useTheme";
-import ThemeButton from "./components/ThemeButton";
+import { ThemeButton } from "./components";
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
