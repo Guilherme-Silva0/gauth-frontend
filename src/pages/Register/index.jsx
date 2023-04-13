@@ -1,5 +1,6 @@
 import { useState } from "react";
 import * as yup from "yup";
+import useAuth from "../../hooks/useAuth";
 import {
   Main,
   Form,
@@ -15,27 +16,32 @@ import {
 } from "../../components";
 
 const schema = yup.object().shape({
-  name: yup.string().required("Name is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
+  name: yup.string().required("Name is required").trim(),
+  email: yup
+    .string()
+    .email("Invalid email")
+    .required("Email is required")
+    .trim(),
   password: yup
     .string()
     .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+    .required("Password is required")
+    .trim(),
   repeatpassword: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
-    .required("Repeat password is required"),
+    .required("Repeat password is required")
+    .trim(),
 });
 
 const Register = () => {
   const [errors, setErrors] = useState({});
+  const { createUser, user } = useAuth();
 
   const handleFormSubmit = async (values) => {
     try {
-      setErrors({});
       await schema.validate(values, { abortEarly: false });
-      // Submit the form data if validation succeeds
-      alert("success");
+      await handleCreateUser(values);
     } catch (err) {
       const newErrors = {};
       err.inner.forEach((e) => {
@@ -43,6 +49,17 @@ const Register = () => {
       });
       setErrors(newErrors);
     }
+  };
+
+  const handleCreateUser = async (values) => {
+    setErrors({});
+    const res = await createUser(values);
+    if (res.error === true) {
+      setErrors({ general: res.message });
+      return false;
+    }
+    console.log(res);
+    return res;
   };
 
   return (
@@ -62,7 +79,7 @@ const Register = () => {
           }}
         >
           <Title>Create an account</Title>
-          {/* <GeneralError>Teste de erro</GeneralError> */}
+          {errors.general && <GeneralError>{errors.general}</GeneralError>}
           <InputGroup>
             <Label htmlFor="name">Name:</Label>
             <Input type="text" placeholder="Type your name..." id="name" />
