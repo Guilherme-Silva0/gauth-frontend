@@ -13,6 +13,7 @@ import {
   FormGroup,
   GeneralError,
   Error,
+  Load,
 } from "../../components";
 
 const schema = yup.object().shape({
@@ -36,12 +37,15 @@ const schema = yup.object().shape({
 
 const Register = () => {
   const [errors, setErrors] = useState({});
-  const { createUser, user } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const { createUser, setUser } = useAuth();
 
   const handleFormSubmit = async (values) => {
     try {
+      setIsLoading(true);
       await schema.validate(values, { abortEarly: false });
       await handleCreateUser(values);
+      setIsLoading(false);
     } catch (err) {
       const newErrors = {};
       err.inner.forEach((e) => {
@@ -59,6 +63,7 @@ const Register = () => {
       return false;
     }
     console.log(res);
+    setUser({ name: values.name, email: values.email });
     return res;
   };
 
@@ -108,7 +113,9 @@ const Register = () => {
             />
             {errors.repeatpassword && <Error>{errors.repeatpassword}</Error>}
           </InputGroup>
-          <Button type="submit">Sign up</Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? <Load /> : "Sign up"}
+          </Button>
         </Form>
       </FormGroup>
     </Main>
