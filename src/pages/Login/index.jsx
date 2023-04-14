@@ -9,6 +9,7 @@ import {
   IconAnimate,
   FormGroup,
   GeneralError,
+  Link,
 } from "../../components";
 
 const Login = () => {
@@ -32,6 +33,7 @@ const Login = () => {
             />
           </InputGroup>
           <Button type="submit">Login</Button>
+          <Link to="/register">Register</Link>
         </Form>
       </FormGroup>
     </Main>

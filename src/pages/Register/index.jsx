@@ -14,6 +14,7 @@ import {
   GeneralError,
   Error,
   Load,
+  Link,
 } from "../../components";
 
 const schema = yup.object().shape({
@@ -116,6 +117,7 @@ const Register = () => {
           <Button type="submit" disabled={isLoading}>
             {isLoading ? <Load /> : "Sign up"}
           </Button>
+          <Link to="/login">login</Link>
         </Form>
       </FormGroup>
     </Main>
