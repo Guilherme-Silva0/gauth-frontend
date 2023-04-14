@@ -10,6 +10,7 @@ import FormGroup from "./FormGroup";
 import GeneralError from "./GeneralError";
 import Error from "./Error";
 import ThemeButton from "./ThemeButton";
+import Load from "./Load";
 
 export {
   Main,
@@ -24,4 +25,5 @@ export {
   GeneralError,
   Error,
   ThemeButton,
+  Load,
 };
