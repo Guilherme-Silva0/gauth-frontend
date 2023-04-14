@@ -10,6 +10,7 @@ import {
   FormGroup,
   GeneralError,
   Link,
+  Text,
 } from "../../components";
 
 const Login = () => {
@@ -33,7 +34,9 @@ const Login = () => {
             />
           </InputGroup>
           <Button type="submit">Login</Button>
-          <Link to="/register">Register</Link>
+          <Text>
+            Don't have an account? <Link to="/register">sign up</Link>
+          </Text>
         </Form>
       </FormGroup>
     </Main>
