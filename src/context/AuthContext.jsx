@@ -9,12 +9,11 @@ export const AuthProvider = ({ children }) => {
 
   const createUser = async (user) => {
     const res = await api.createUser(user);
-    setUser(user);
     return res;
   };
 
   return (
-    <AuthContext.Provider value={{ createUser, user }}>
+    <AuthContext.Provider value={{ createUser, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );
