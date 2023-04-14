@@ -12,6 +12,7 @@ import Error from "./Error";
 import ThemeButton from "./ThemeButton";
 import Load from "./Load";
 import Link from "./Link";
+import Text from "./Text";
 
 export {
   Main,
@@ -28,4 +29,5 @@ export {
   ThemeButton,
   Load,
   Link,
+  Text,
 };
