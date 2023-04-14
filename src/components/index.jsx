@@ -11,6 +11,7 @@ import GeneralError from "./GeneralError";
 import Error from "./Error";
 import ThemeButton from "./ThemeButton";
 import Load from "./Load";
+import Link from "./Link";
 
 export {
   Main,
@@ -26,4 +27,5 @@ export {
   Error,
   ThemeButton,
   Load,
+  Link,
 };
