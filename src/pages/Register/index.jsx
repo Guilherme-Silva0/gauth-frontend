@@ -54,6 +54,7 @@ const Register = () => {
         newErrors[e.path] = e.message;
       });
       setErrors(newErrors);
+      setIsLoading(false);
     }
   };
 
