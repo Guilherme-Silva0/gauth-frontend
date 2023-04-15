@@ -1,5 +1,5 @@
 const Main = (props) => (
-  <main className="flex items-center justify-center h-full w-full">
+  <main className="flex flex-col items-center justify-center h-full w-full">
     {props.children}
   </main>
 );
