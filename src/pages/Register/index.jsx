@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as yup from "yup";
 import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import {
   Main,
   Form,
@@ -41,6 +42,7 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const { createUser, setUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (values) => {
     try {
@@ -48,6 +50,7 @@ const Register = () => {
       await schema.validate(values, { abortEarly: false });
       await handleCreateUser(values);
       setIsLoading(false);
+      navigate("/thanks");
     } catch (err) {
       const newErrors = {};
       err.inner.forEach((e) => {
