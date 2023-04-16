@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Thanks from "./pages/Thanks";
 import useTheme from "./hooks/useTheme";
 import { ThemeButton } from "./components";
+import Confirm from "./pages/Confirm";
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/thanks" element={<Thanks />} />
+        <Route path="/confirm/:confirmation_code" element={<Confirm />} />
       </Routes>
     </>
   );
