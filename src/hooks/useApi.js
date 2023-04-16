@@ -15,6 +15,14 @@ const useApi = () => ({
       return err.response.data;
     }
   },
+  confirmCode: async (confirmation_code) => {
+    try {
+      const res = await api.put(`/register/confirm/${confirmation_code}`);
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
+  },
 });
 
 export default useApi;
