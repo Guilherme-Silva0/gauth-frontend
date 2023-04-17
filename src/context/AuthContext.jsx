@@ -17,8 +17,15 @@ export const AuthProvider = ({ children }) => {
     return res;
   };
 
+  const authenticateUser = async (user) => {
+    const res = await api.authenticateUser(user);
+    return res;
+  };
+
   return (
-    <AuthContext.Provider value={{ createUser, confirmCode, user, setUser }}>
+    <AuthContext.Provider
+      value={{ createUser, confirmCode, authenticateUser, user, setUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
