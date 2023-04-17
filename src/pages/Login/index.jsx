@@ -1,3 +1,7 @@
+import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+
 import {
   Main,
   Form,
@@ -11,16 +15,50 @@ import {
   GeneralError,
   Link,
   Text,
+  Load,
 } from "../../components";
 
 const Login = () => {
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const { authenticateUser, setUser } = useAuth();
+  const navigate = useNavigate();
+
+  const handleFormSubmit = async (values) => {
+    setIsLoading(true);
+    await handleAuthenticateUser(values);
+    setIsLoading(false);
+  };
+
+  const handleAuthenticateUser = async (values) => {
+    setErrors({});
+    const res = await authenticateUser(values);
+    if (res.error === true) {
+      setErrors({ general: res.message });
+      setIsLoading(false);
+      return;
+    }
+    setUser({ id: res.user.id, name: res.user.name, email: res.user.email });
+    navigate("/");
+    return;
+  };
+
   return (
     <Main>
       <FormGroup>
         <IconAnimate />
-        <Form>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            const { email, password } = e.target.elements;
+            handleFormSubmit({
+              email: email.value,
+              password: password.value,
+            });
+          }}
+        >
           <Title>Login</Title>
-          <GeneralError>E-mail or password incorrect</GeneralError>
+          {errors.general && <GeneralError>{errors.general}</GeneralError>}
           <InputGroup>
             <Label htmlFor="email">E-Mail</Label>
             <Input type="email" id="email" placeholder="Enter your E-mail..." />
@@ -33,7 +71,9 @@ const Login = () => {
               placeholder="Enter your password..."
             />
           </InputGroup>
-          <Button type="submit">Login</Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? <Load /> : "Login"}
+          </Button>
           <Text>
             Don't have an account? <Link to="/register">sign up</Link>
           </Text>
