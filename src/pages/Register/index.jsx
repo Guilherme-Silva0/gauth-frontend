@@ -49,15 +49,13 @@ const Register = () => {
       setIsLoading(true);
       await schema.validate(values, { abortEarly: false });
       await handleCreateUser(values);
-      setIsLoading(false);
-      navigate("/thanks");
     } catch (err) {
+      setIsLoading(false);
       const newErrors = {};
       err.inner.forEach((e) => {
         newErrors[e.path] = e.message;
       });
       setErrors(newErrors);
-      setIsLoading(false);
     }
   };
 
@@ -66,11 +64,12 @@ const Register = () => {
     const res = await createUser(values);
     if (res.error === true) {
       setErrors({ general: res.message });
+      setIsLoading(false);
       return false;
     }
-    console.log(res);
     setUser({ name: values.name, email: values.email });
-    return res;
+    setIsLoading(false);
+    navigate("/thanks");
   };
 
   return (
