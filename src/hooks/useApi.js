@@ -23,6 +23,14 @@ const useApi = () => ({
       return err.response.data;
     }
   },
+  authenticateUser: async (user) => {
+    try {
+      const res = await api.post("/login", user);
+      return res.data;
+    } catch (error) {
+      return error.response.data;
+    }
+  },
 });
 
 export default useApi;
