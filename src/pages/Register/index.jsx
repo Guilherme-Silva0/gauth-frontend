@@ -41,7 +41,7 @@ const schema = yup.object().shape({
 const Register = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const { createUser, setUser } = useAuth();
+  const { createUser } = useAuth();
   const navigate = useNavigate();
 
   const handleFormSubmit = async (values) => {
@@ -67,7 +67,6 @@ const Register = () => {
       setIsLoading(false);
       return false;
     }
-    setUser({ name: values.name, email: values.email });
     setIsLoading(false);
     navigate("/thanks");
   };
