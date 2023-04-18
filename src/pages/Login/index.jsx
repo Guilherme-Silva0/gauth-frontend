@@ -21,7 +21,7 @@ import {
 const Login = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const { authenticateUser, setUser } = useAuth();
+  const { authenticateUser } = useAuth();
   const navigate = useNavigate();
 
   const handleFormSubmit = async (values) => {
@@ -38,7 +38,7 @@ const Login = () => {
       setIsLoading(false);
       return;
     }
-    setUser({ id: res.user.id, name: res.user.name, email: res.user.email });
+    localStorage.setItem("token", res.token);
     navigate("/");
     return;
   };

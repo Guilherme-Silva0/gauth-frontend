@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const Confirm = () => {
   const [error, setError] = useState("");
-  const { confirmCode, setUser } = useAuth();
+  const { confirmCode } = useAuth();
   const { confirmation_code } = useParams();
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Confirm = () => {
       setError(res.message);
     } else {
       setError("");
-      setUser(res.user);
+      localStorage.setItem("token", res.token);
       navigate("/");
     }
   };
