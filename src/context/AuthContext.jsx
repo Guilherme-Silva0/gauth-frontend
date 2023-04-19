@@ -36,6 +36,12 @@ export const AuthProvider = ({ children }) => {
     setUser(res.user);
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser({});
+    navigate("/login");
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -43,6 +49,7 @@ export const AuthProvider = ({ children }) => {
         confirmCode,
         authenticateUser,
         verifyAuth,
+        logout,
         user,
       }}
     >
