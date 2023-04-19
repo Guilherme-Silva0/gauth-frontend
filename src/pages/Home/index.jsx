@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useEffect } from "react";
 import { Main, Text, Title } from "../../components";
 import { BsInstagram } from "react-icons/bs";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 const Home = () => {
-  const { user, verifyAuth } = useAuth();
+  const { user, verifyAuth, logout } = useAuth();
   useEffect(() => {
     verifyAuth();
   }, []);
@@ -13,7 +13,17 @@ const Home = () => {
   return (
     <Main>
       <div className="bg-gray-100 max-w-3xl p-8 rounded-xl shadow-xl dark:bg-fist mx-4">
-        <Title additionalClass="text-center">Welcome {user.name} 🤗️</Title>
+        <div className="w-full flex justify-end items-center mb-2">
+          <Title additionalClass="text-center mb-0 flex-1">
+            Welcome {user.name} 🤗️
+          </Title>
+          <button
+            onClick={logout}
+            className="flex items-center justify-center w-fit h-fit p-2 mx-auto bg-fist rounded text-gray-200 text-lg font-bold shadow transition-all dark:bg-third hover:scale-110"
+          >
+            <RiLogoutCircleLine />
+          </button>
+        </div>
         <Text additionalClass="text-justify">
           Thank you for testing my login application! I hope that you have a
           great experience using it and that you have enjoyed the features and
