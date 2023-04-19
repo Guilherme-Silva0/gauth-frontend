@@ -71,6 +71,7 @@ const Login = () => {
               placeholder="Enter your password..."
             />
           </InputGroup>
+          <Link to="/password_recovery">Forgot your password?</Link>
           <Button type="submit" disabled={isLoading}>
             {isLoading ? <Load /> : "Login"}
           </Button>
