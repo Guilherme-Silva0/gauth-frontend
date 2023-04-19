@@ -1,11 +1,13 @@
 import { createContext, useState } from "react";
 import useApi from "../hooks/useApi";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const api = useApi();
+  const navigate = useNavigate();
 
   const createUser = async (user) => {
     const res = await api.createUser(user);
@@ -22,9 +24,27 @@ export const AuthProvider = ({ children }) => {
     return res;
   };
 
+  const verifyAuth = async () => {
+    const token = localStorage.getItem("token");
+    const res = await api.getUser(token);
+    if (res.error === true) {
+      if (token) {
+        localStorage.removeItem("token");
+      }
+      return navigate("/login");
+    }
+    setUser(res.user);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ createUser, confirmCode, authenticateUser, user, setUser }}
+      value={{
+        createUser,
+        confirmCode,
+        authenticateUser,
+        verifyAuth,
+        user,
+      }}
     >
       {children}
     </AuthContext.Provider>
