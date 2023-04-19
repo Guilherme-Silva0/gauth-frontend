@@ -5,13 +5,9 @@ import { Main, Text, Title } from "../../components";
 import { BsInstagram } from "react-icons/bs";
 
 const Home = () => {
-  const { user } = useAuth();
-  const navigate = useNavigate();
-
+  const { user, verifyAuth } = useAuth();
   useEffect(() => {
-    if (Object.keys(user).length === 0) {
-      navigate("/login");
-    }
+    verifyAuth();
   }, []);
 
   return (
