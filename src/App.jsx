@@ -6,6 +6,7 @@ import Thanks from "./pages/Thanks";
 import useTheme from "./hooks/useTheme";
 import { ThemeButton } from "./components";
 import Confirm from "./pages/Confirm";
+import PasswordRecovery from "./pages/PasswordRecovery";
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
@@ -18,6 +19,11 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/thanks" element={<Thanks />} />
         <Route path="/confirm/:confirmation_code" element={<Confirm />} />
+        <Route path="/password_recovery" element={<PasswordRecovery />} />
+        <Route
+          path="password_recovery/:confirmation_code"
+          element={<PasswordRecovery />}
+        />
       </Routes>
     </>
   );
