@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as yup from "yup";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import {
   Button,
   Form,
@@ -13,6 +14,7 @@ import {
   Title,
   Load,
   Error,
+  GeneralError,
 } from "../../components";
 
 const schemaEmail = yup.object().shape({
@@ -41,6 +43,8 @@ const PasswordRecovery = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const { confirmation_code } = useParams();
+  const { passwordRecovery, updatePassword } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (confirmation_code) setIsCode(true);
@@ -50,6 +54,7 @@ const PasswordRecovery = () => {
     try {
       setIsLoading(true);
       await schemaEmail.validate(values, { abortEarly: false });
+      await handlePasswordRecovery(values);
     } catch (err) {
       setIsLoading(false);
       const newErrors = {};
@@ -64,6 +69,7 @@ const PasswordRecovery = () => {
     try {
       setIsLoading(true);
       await schemaPassword.validate(values, { abortEarly: false });
+      await handleUpdatePassword(values);
     } catch (err) {
       setIsLoading(false);
       const newErrors = {};
@@ -72,6 +78,33 @@ const PasswordRecovery = () => {
       });
       setErrors(newErrors);
     }
+  };
+
+  const handlePasswordRecovery = async (values) => {
+    setErrors({});
+    const res = await passwordRecovery(values);
+    if (res.error === true) {
+      setErrors({ general: res.message });
+      setIsLoading(false);
+      return false;
+    }
+    setIsLoading(false);
+    navigate("/recovery_email_message");
+  };
+
+  const handleUpdatePassword = async (values) => {
+    setErrors({});
+    const res = await updatePassword({
+      password: values.password,
+      confirmation_code,
+    });
+    if (res.error === true) {
+      setErrors({ general: res.message });
+      setIsLoading(false);
+      return false;
+    }
+    setIsLoading(false);
+    navigate("/login");
   };
 
   const FormEmail = () => {
@@ -88,6 +121,9 @@ const PasswordRecovery = () => {
             }}
           >
             <Title>Recover Password</Title>
+            {errors.general && (
+              <GeneralError>Hear an error, try again later</GeneralError>
+            )}
             <InputGroup>
               <Label htmlFor="email">E-Mail:</Label>
               <Input
@@ -122,6 +158,7 @@ const PasswordRecovery = () => {
             }}
           >
             <Title>New password</Title>
+            {errors.general && <GeneralError>{errors.general}</GeneralError>}
             <InputGroup>
               <Label htmlFor="password">Password:</Label>
               <Input
