@@ -7,6 +7,7 @@ import useTheme from "./hooks/useTheme";
 import { ThemeButton } from "./components";
 import Confirm from "./pages/Confirm";
 import PasswordRecovery from "./pages/PasswordRecovery";
+import RecoveryEmail from "./pages/RecoveryEmailMessage";
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
@@ -24,6 +25,7 @@ const App = () => {
           path="password_recovery/:confirmation_code"
           element={<PasswordRecovery />}
         />
+        <Route path="/recovery_email_message" element={<RecoveryEmail />} />
       </Routes>
     </>
   );
