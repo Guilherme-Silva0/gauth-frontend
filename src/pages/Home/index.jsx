@@ -13,13 +13,13 @@ const Home = () => {
   return (
     <Main>
       <div className="bg-gray-100 max-w-3xl p-8 rounded-xl shadow-xl dark:bg-fist mx-4">
-        <div className="w-full flex justify-end items-center mb-2">
-          <Title additionalClass="text-center mb-0 flex-1">
+        <div className="w-full flex justify-center items-center mb-2">
+          <Title additionalClass="text-center flex-1">
             Welcome {user.name} 🤗️
           </Title>
           <button
             onClick={logout}
-            className="flex items-center justify-center w-fit h-fit p-2 mx-auto bg-fist rounded text-gray-200 text-lg font-bold shadow transition-all dark:bg-third hover:scale-110"
+            className="flex items-center justify-center w-fit h-fit p-2 mb-3 mx-auto bg-fist rounded text-gray-200 text-lg font-bold shadow transition-all dark:bg-third hover:scale-110"
           >
             <RiLogoutCircleLine />
           </button>
