@@ -39,6 +39,26 @@ const useApi = () => ({
         },
       });
       return res.data;
+    } catch (err) {
+      if (err.message === "Network Error") return { error: true };
+      return err.response.data;
+    }
+  },
+  passwordRecovery: async (email) => {
+    try {
+      const res = await api.put("/password_recovery", email);
+      return res.data;
+    } catch (error) {
+      return error.response.data;
+    }
+  },
+  updatePassword: async (values) => {
+    try {
+      const res = await api.put(
+        `/password_recovery/${values.confirmation_code}`,
+        { password: values.password }
+      );
+      return res.data;
     } catch (error) {
       return error.response.data;
     }
