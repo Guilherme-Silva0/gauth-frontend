@@ -42,6 +42,16 @@ export const AuthProvider = ({ children }) => {
     navigate("/login");
   };
 
+  const passwordRecovery = async (email) => {
+    const res = await api.passwordRecovery(email);
+    return res;
+  };
+
+  const updatePassword = async (values) => {
+    const res = await api.updatePassword(values);
+    return res;
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -50,6 +60,8 @@ export const AuthProvider = ({ children }) => {
         authenticateUser,
         verifyAuth,
         logout,
+        passwordRecovery,
+        updatePassword,
         user,
       }}
     >
