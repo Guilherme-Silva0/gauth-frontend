@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 
 const Input = ({ type, placeholder, id }) => {
-  const [showPassword, setShowPassword] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const toggleInputPassword = () => {
     setShowPassword(!showPassword);
