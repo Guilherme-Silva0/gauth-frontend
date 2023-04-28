@@ -26,7 +26,7 @@ When using the application, the user can log in or register as a new user, provi
 
 ## How to use
 
-Para utilizar a aplicação, basta acessar o link https://gauth-nine.vercel.app/
+To use the application, just access the link https://gauth-nine.vercel.app/
 
 ## How to install locally
 
